@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "backendRastro", "backendRastro.csproj", "{13E47478-6610-49CD-A9D3-D7A7B354804C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{13E47478-6610-49CD-A9D3-D7A7B354804C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13E47478-6610-49CD-A9D3-D7A7B354804C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13E47478-6610-49CD-A9D3-D7A7B354804C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13E47478-6610-49CD-A9D3-D7A7B354804C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {855319D9-6120-41DC-B662-6A1D1B24C6C1}
+	EndGlobalSection
+EndGlobal
