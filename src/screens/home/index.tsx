@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {Image, Text, View} from 'react-native';
@@ -5,18 +6,21 @@ import {TextInput, Button} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
 import TopBar from '../../components/TopBar';
 import {BottomNavigation} from 'react-native-paper';
-import MapView from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 
 function HomeScreen(): JSX.Element {
   const MapRoute = () => (
     <MapView
-      initialRegion={{
-        latitude: 37.78825,   
-        longitude: -122.4324,
+      provider={PROVIDER_GOOGLE}
+      style={{flex: 1}}
+      region={{
+        latitude: -27.599853585791422,
+        longitude: -48.51779658880484,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       }}
     />
+
   );
   const AdoptRoute = () => (
     <View className="bg-purple-500 h-full">
