@@ -1,6 +1,0 @@
-@backendRastro_HostAddress = http://localhost:5030
-
-GET {{backendRastro_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
