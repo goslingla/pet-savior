@@ -1,0 +1,41 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum AnimalType {
+  DOG
+  CAT
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
+  password   String?
+  googleId   String?  @unique
+  name       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  animals    Animal[]
+}
+
+model Animal {
+  id          Int         @id @default(autoincrement())
+  name        String
+  age         Int
+  breed       String
+  neighborhood String
+  isForAdoption Boolean
+  isMissing   Boolean
+  location    String?
+  type        AnimalType
+  picture     String?     
+  userId      Int
+  user        User        @relation(fields: [userId], references: [id])
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
