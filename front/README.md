@@ -1,41 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
+# Welcome to your Expo app 👋
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-<body>
+## Get started
 
-  <header>
-    <h1>Rastro App</h1>
-  </header>
+1. Install dependencies
 
-  <section>
-    <h2>About</h2>
-    <p>Rastro App is a mobile application developed to assist in the search for lost pets and facilitate adoption processes. This project serves as the culmination of my undergraduate thesis at UFSC (Federal University of Santa Catarina).</p>
-  </section>
+   ```bash
+   npm install
+   ```
 
-  <section>
-    <h2>Technologies Used So Far</h2>
-    <ul>
-      <li><a href="https://reactnative.dev/">React Native</a></li>
-      <li><a href="https://www.typescriptlang.org/">TypeScript</a></li>
-      <li><a href="https://tailwindcss.com/">Tailwind CSS</a></li>
-    </ul>
-  </section>
+2. Start the app
 
-  <section>
-    <h2>Project Overview</h2>
-    <p>The primary goal of Rastro App is to provide a user-friendly platform for pet owners to locate their lost animals and for potential adopters to find new companions. The application facilitates the reporting of lost pets, allows users to browse animals available for adoption, and provides a platform for reporting animal abuse.</p>
-  </section>
+   ```bash
+    npx expo start
+   ```
 
-  <footer>
-    <p>Feel free to reach out with any questions or feedback!</p>
-    <p><strong>Thank you for your interest in Rastro App!!</strong></p>
-  </footer>
+In the output, you'll find options to open the app in a
 
-</body>
+- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-</html>
+You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+
+## Get a fresh project
+
+When you're ready, run:
+
+```bash
+npm run reset-project
+```
+
+This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+
+## Learn more
+
+To learn more about developing your project with Expo, look at the following resources:
+
+- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
+- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+
+## Join the community
+
+Join our community of developers creating universal apps.
+
+- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
+- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
