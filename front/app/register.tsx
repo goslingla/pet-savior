@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { TextInput, Button } from "react-native-paper";
-import BlueButton from "../components/BlueButton";
 import { useRouter } from "expo-router";
 import axios from "axios";
 
@@ -66,11 +65,8 @@ const RegisterScreen = () => {
         onChangeText={setPassword}
         style={{ width: "80%", marginVertical: 10 }}
       />
-      <BlueButton title="Cadastre-se" onPress={handleRegistration} />
+      <Button onPress={handleRegistration}>Cadastre-se</Button>
       <Text style={{ marginVertical: 10 }}>Ou entre com</Text>
-      <Button icon="facebook" mode="contained" style={{ marginVertical: 5 }}>
-        Cadastre-se com Facebook
-      </Button>
       <Button icon="google" mode="contained" style={{ marginVertical: 5 }}>
         Cadastre-se com Google
       </Button>

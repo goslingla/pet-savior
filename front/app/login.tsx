@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { TextInput, Button } from "react-native-paper";
-import BlueButton from "../components/BlueButton";
 import { useRouter } from "expo-router";
 
 const LoginScreen = () => {
@@ -18,42 +17,19 @@ const LoginScreen = () => {
   }
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: "#05B6EF",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <View
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#05B6EF",
-          height: "25%",
-          width: "100%",
-        }}
-      >
-        <Text style={{ color: "white", fontSize: 24 }}>Rastro</Text>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>App name</Text>
       </View>
-      <View
-        style={{
-          justifyContent: "center",
-          backgroundColor: "white",
-          flex: 1,
-          alignItems: "center",
-          borderTopLeftRadius: 40,
-          borderTopRightRadius: 40,
-        }}
-      >
+      <View style={styles.formContainer}>
         <TextInput
           mode="outlined"
           label="Email"
           placeholder="exemplo@gmail.com"
           value={email}
           onChangeText={setEmail}
-          style={{ width: "80%", marginVertical: 10 }}
+          style={styles.input}
+          theme={{ colors: { primary: "#333333", outline: "grey" } }}
         />
         <TextInput
           mode="outlined"
@@ -61,27 +37,111 @@ const LoginScreen = () => {
           placeholder="Entre com sua senha"
           value={password}
           onChangeText={setPassword}
-          style={{ width: "80%", marginVertical: 10 }}
+          style={styles.input}
+          theme={{ colors: { primary: "#333333", outline: "grey" } }}
         />
-        <BlueButton title="Login" onPress={handleNavigateToHome} />
-        <Text style={{ marginVertical: 10 }}>Ou entre com</Text>
-        <Button icon="facebook" mode="contained" style={{ marginVertical: 5 }}>
-          Entrar com Facebook
+        <Button
+          onPress={handleNavigateToHome}
+          style={styles.loginButton}
+          labelStyle={{
+            color: "white",
+          }}
+        >
+          Login
         </Button>
-        <Button icon="google" mode="contained" style={{ marginVertical: 5 }}>
+        <Text style={styles.orText}>Ou entre com</Text>
+        <Button
+          icon="google"
+          mode="outlined"
+          style={styles.socialButton}
+          labelStyle={{
+            color: "grey",
+          }}
+        >
           Entrar com Google
         </Button>
-        <Text style={{ marginVertical: 10 }}>Não tem conta?</Text>
-        <Button
-          mode="text"
-          onPress={handleNavigateToRegister}
-          style={{ marginVertical: 5 }}
-        >
-          Cadastre-se
-        </Button>
+        <View style={styles.registerContainer}>
+          <Text style={styles.registerText}>Não tem conta?</Text>
+          <Button
+            mode="text"
+            onPress={handleNavigateToRegister}
+            style={styles.registerButton}
+            labelStyle={{
+              color: "#333333",
+              fontWeight: "bold",
+              textDecorationLine: "underline",
+            }}
+          >
+            Cadastre-se
+          </Button>
+        </View>
       </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#EB8E4B",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  header: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#EB8E4B",
+    height: "25%",
+    width: "100%",
+  },
+  headerText: {
+    color: "white",
+    fontSize: 24,
+  },
+  formContainer: {
+    justifyContent: "center",
+    backgroundColor: "white",
+    flex: 1,
+    alignItems: "center",
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    width: "100%",
+  },
+
+  input: {
+    width: "80%",
+    marginVertical: 10,
+  },
+  orText: {
+    marginVertical: 10,
+  },
+  loginButton: {
+    backgroundColor: "#333333",
+    width: 330,
+    height: 50,
+    borderRadius: 10,
+    marginVertical: 30,
+  },
+  socialButton: {
+    marginVertical: 5,
+
+    borderColor: "grey",
+    borderWidth: 1,
+    width: 330,
+    height: 50,
+    borderRadius: 10,
+  },
+  registerText: {
+    marginVertical: 10,
+  },
+  registerButton: {
+    marginVertical: 5,
+  },
+
+  registerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+});
 
 export default LoginScreen;
