@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import { useRouter } from "expo-router";
+
+const googleIcon = require("../assets/icons/google/google.png");
 
 const LoginScreen = () => {
   const [email, setEmail] = useState<string>("");
@@ -51,13 +53,13 @@ const LoginScreen = () => {
         </Button>
         <Text style={styles.orText}>Ou entre com</Text>
         <Button
-          icon="google"
           mode="outlined"
           style={styles.socialButton}
           labelStyle={{
-            color: "grey",
+            color: "#333333",
           }}
         >
+          <Image source={googleIcon} />
           Entrar com Google
         </Button>
         <View style={styles.registerContainer}>
@@ -98,6 +100,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 24,
   },
+
   formContainer: {
     justifyContent: "center",
     backgroundColor: "white",
@@ -124,9 +127,8 @@ const styles = StyleSheet.create({
   },
   socialButton: {
     marginVertical: 5,
-
-    borderColor: "grey",
-    borderWidth: 1,
+    borderColor: "#333333",
+    borderWidth: 1.5,
     width: 330,
     height: 50,
     borderRadius: 10,

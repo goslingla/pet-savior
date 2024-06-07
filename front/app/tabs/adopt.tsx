@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   },
   filterContainer: {
     marginBottom: 20,
-    paddingTop: 50, // Adiciona um espaçamento na parte superior
+    paddingTop: 50,
   },
   filterButtons: {
     flexDirection: "row",

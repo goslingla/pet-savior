@@ -1,19 +1,23 @@
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { StyleSheet, Image, Platform, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { WebView } from "react-native-webview";
 
 export default function TabTwoScreen() {
-  return <Text>Oi</Text>;
+  return (
+    <View style={styles.container}>
+      <WebView
+        originWhitelist={["*"]}
+        source={require("../../assets/map.html")}
+        style={styles.webview}
+      />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: "#808080",
-    bottom: -90,
-    left: -35,
-    position: "absolute",
+  container: {
+    flex: 1,
   },
-  titleContainer: {
-    flexDirection: "row",
-    gap: 8,
+  webview: {
+    flex: 1,
   },
 });
