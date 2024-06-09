@@ -45,21 +45,26 @@ const LoginScreen = () => {
         <Button
           onPress={handleNavigateToHome}
           style={styles.loginButton}
+          contentStyle={{ height: 50 }}
           labelStyle={{
             color: "white",
+            fontSize: 15,
+            fontFamily: "Poppins-Regular",
           }}
         >
           Login
         </Button>
         <Text style={styles.orText}>Ou entre com</Text>
         <Button
+          icon="google"
           mode="outlined"
           style={styles.socialButton}
           labelStyle={{
             color: "#333333",
+            fontFamily: "Poppins-Regular",
           }}
         >
-          <Image source={googleIcon} />
+          {/* <Image source={googleIcon} /> */}
           Entrar com Google
         </Button>
         <View style={styles.registerContainer}>
@@ -70,8 +75,8 @@ const LoginScreen = () => {
             style={styles.registerButton}
             labelStyle={{
               color: "#333333",
-              fontWeight: "bold",
               textDecorationLine: "underline",
+              fontFamily: "Poppins-SemiBold",
             }}
           >
             Cadastre-se
@@ -99,6 +104,7 @@ const styles = StyleSheet.create({
   headerText: {
     color: "white",
     fontSize: 24,
+    fontFamily: "Poppins-Bold",
   },
 
   formContainer: {
@@ -117,6 +123,7 @@ const styles = StyleSheet.create({
   },
   orText: {
     marginVertical: 10,
+    fontFamily: "Poppins-Regular",
   },
   loginButton: {
     backgroundColor: "#333333",
@@ -124,6 +131,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     marginVertical: 30,
+    justifyContent: "center",
   },
   socialButton: {
     marginVertical: 5,
@@ -132,12 +140,15 @@ const styles = StyleSheet.create({
     width: 330,
     height: 50,
     borderRadius: 10,
+    justifyContent: "center",
   },
   registerText: {
     marginVertical: 10,
+    fontFamily: "Poppins-Regular",
   },
   registerButton: {
     marginVertical: 5,
+    fontFamily: "Poppins-Regular",
   },
 
   registerContainer: {

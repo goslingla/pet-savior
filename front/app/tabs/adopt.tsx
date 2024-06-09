@@ -36,7 +36,7 @@ export default function TabThreeScreen() {
               icon="dog"
               size={30}
               onPress={() => handleAnimalTypePress("dog")}
-              iconColor={selectedAnimalType === "dog" ? "purple" : "black"}
+              iconColor={selectedAnimalType === "dog" ? "#333333" : "#d3d3d3"}
             />
             <Text style={styles.filterText}>Cães</Text>
           </View>
@@ -46,7 +46,7 @@ export default function TabThreeScreen() {
               icon="cat"
               size={30}
               onPress={() => handleAnimalTypePress("cat")}
-              iconColor={selectedAnimalType === "cat" ? "purple" : "black"}
+              iconColor={selectedAnimalType === "cat" ? "#333333" : "#d3d3d3"}
             />
             <Text style={styles.filterText}>Gatos</Text>
           </View>
@@ -55,21 +55,48 @@ export default function TabThreeScreen() {
           <Button
             mode={selectedSize === "Pequeno" ? "contained" : "outlined"}
             onPress={() => handleSizePress("Pequeno")}
-            style={styles.button}
+            style={[
+              styles.button,
+              selectedSize === "Pequeno" && styles.selectedButton,
+            ]}
+            labelStyle={[
+              selectedSize === "Pequeno"
+                ? styles.buttonTextBold
+                : styles.buttonTextRegular,
+              { color: selectedSize === "Pequeno" ? "white" : "#333333" },
+            ]}
           >
             Pequeno
           </Button>
           <Button
             mode={selectedSize === "Médio" ? "contained" : "outlined"}
             onPress={() => handleSizePress("Médio")}
-            style={styles.button}
+            style={[
+              styles.button,
+              selectedSize === "Médio" && styles.selectedButton,
+            ]}
+            labelStyle={[
+              selectedSize === "Médio"
+                ? styles.buttonTextBold
+                : styles.buttonTextRegular,
+              { color: selectedSize === "Médio" ? "white" : "#333333" },
+            ]}
           >
             Médio
           </Button>
           <Button
             mode={selectedSize === "Grande" ? "contained" : "outlined"}
             onPress={() => handleSizePress("Grande")}
-            style={styles.button}
+            style={[
+              styles.button,
+              selectedSize === "Grande" && styles.selectedButton,
+            ]}
+            labelStyle={[
+              selectedSize === "Grande"
+                ? styles.buttonTextBold
+                : styles.buttonTextRegular,
+              { color: selectedSize === "Grande" ? "white" : "#333333" },
+            ]}
           >
             Grande
           </Button>
@@ -78,20 +105,32 @@ export default function TabThreeScreen() {
           <Button
             mode={selectedGender === "Macho" ? "contained" : "outlined"}
             onPress={() => handleGenderPress("Macho")}
-            style={styles.button}
-            labelStyle={{
-              color: selectedGender === "Macho" ? "white" : "black",
-            }}
+            style={[
+              styles.button,
+              selectedGender === "Macho" && styles.selectedButton,
+            ]}
+            labelStyle={[
+              selectedGender === "Macho"
+                ? styles.buttonTextBold
+                : styles.buttonTextRegular,
+              { color: selectedGender === "Macho" ? "white" : "#333333" },
+            ]}
           >
             Macho
           </Button>
           <Button
             mode={selectedGender === "Fêmea" ? "contained" : "outlined"}
             onPress={() => handleGenderPress("Fêmea")}
-            style={styles.button}
-            labelStyle={{
-              color: selectedGender === "Fêmea" ? "white" : "black",
-            }}
+            style={[
+              styles.button,
+              selectedGender === "Fêmea" && styles.selectedButton,
+            ]}
+            labelStyle={[
+              selectedGender === "Fêmea"
+                ? styles.buttonTextBold
+                : styles.buttonTextRegular,
+              { color: selectedGender === "Fêmea" ? "white" : "#333333" },
+            ]}
           >
             Fêmea
           </Button>
@@ -104,6 +143,8 @@ export default function TabThreeScreen() {
             name={animal.name}
             age={animal.age}
             image={animal.image}
+            location={animal.location}
+            reason={animal.reason}
             onPress={() => handlePress(animal.name)}
           />
         ))}
@@ -115,6 +156,7 @@ export default function TabThreeScreen() {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+    // backgroundColor: "#CC5500",
   },
   filterContainer: {
     marginBottom: 20,
@@ -132,10 +174,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    borderWidth: 1.5,
-    minWidth: 80,
-    paddingVertical: 0,
-    paddingHorizontal: 2,
+    borderWidth: 1,
+    minWidth: 60,
+  },
+  selectedButton: {
+    backgroundColor: "#333333",
   },
   filterColumn: {
     flexDirection: "column",
@@ -143,5 +186,15 @@ const styles = StyleSheet.create({
   },
   filterText: {
     marginTop: -15,
+    fontFamily: "Poppins-SemiBold",
+    fontSize: 12,
+  },
+  buttonTextRegular: {
+    fontFamily: "Poppins-Regular",
+    fontSize: 12,
+  },
+  buttonTextBold: {
+    fontFamily: "Poppins-Regular",
+    fontSize: 12,
   },
 });

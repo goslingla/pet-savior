@@ -17,6 +17,10 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         headerShown: false,
+        tabBarLabelStyle: {
+          color: "#333333",
+          fontFamily: "Poppins-Light", // Aplica a fonte Poppins-Light aos títulos das abas
+        },
       }}
     >
       <Tabs.Screen
@@ -38,7 +42,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <MaterialCommunityIconsTabBarIcon
               name={focused ? "map-marker" : "map-marker-outline"}
-              color={color}
+              color={"#333333"}
             />
           ),
         }}
@@ -50,7 +54,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <IoniconsTabBarIcon
               name={focused ? "paw" : "paw-outline"}
-              color={color}
+              color={"#333333"}
             />
           ),
         }}
@@ -62,7 +66,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <MaterialIconsTabBarIcon
               name={focused ? "report" : "report-gmailerrorred"}
-              color={color}
+              color={"#333333"}
             />
           ),
         }}

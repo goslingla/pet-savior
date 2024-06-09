@@ -21,15 +21,63 @@
   <div id="map"></div>
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <script>
-    var map = L.map('map').setView([37.78825, -122.4324], 13);
+    var map = L.map('map').setView([-27.599982937580354, -48.51710645556599], 13); // Ajuste as coordenadas aqui
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    // Use CartoDB Positron tiles
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19
     }).addTo(map);
 
-    L.marker([37.78825, -122.4324]).addTo(map)
-      .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-      .openPopup();
+    // Criação dos ícones personalizados
+    var sightingIcon = L.icon({
+      iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+    var missingIcon = L.icon({
+      iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+    // Evento de clique para capturar coordenadas e enviar ao WebView
+    map.on('click', function(e) {
+      var latLng = e.latlng;
+      window.ReactNativeWebView.postMessage(JSON.stringify(latLng));
+    });
+
+    // Função para adicionar marcador
+    function addMarker(latLng, type, imageUrl) {
+      var icon = type === 'sighting' ? sightingIcon : missingIcon;
+      var now = new Date();
+      var time = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+      var date = now.toLocaleDateString('pt-BR');
+      var message = type === 'sighting' ? `Animal avistado às ${time}<br>${date}` : `Animal desaparecido às ${time}<br>${date}`;
+      imageUrl = imageUrl || 'https://via.placeholder.com/100'; // Placeholder if no image
+
+      var popupContent = '<div>' +
+                          '<p>' + message + '</p>' +
+                          '<img src="' + imageUrl + '" alt="Animal" width="100" height="100">' +
+                         '</div>';
+      L.marker([latLng.lat, latLng.lng], { icon: icon }).addTo(map)
+        .bindPopup(popupContent)
+        .openPopup();
+    }
+
+    // Receber mensagem do React Native
+    document.addEventListener("message", function(event) {
+      var data = JSON.parse(event.data);
+      addMarker(data.latLng, data.type, data.imageUrl);
+    });
   </script>
 </body>
 </html>
