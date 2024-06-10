@@ -36,9 +36,16 @@ export default function TabThreeScreen() {
               icon="dog"
               size={30}
               onPress={() => handleAnimalTypePress("dog")}
-              iconColor={selectedAnimalType === "dog" ? "#333333" : "#d3d3d3"}
+              iconColor={selectedAnimalType === "dog" ? "#333333" : "white"}
             />
-            <Text style={styles.filterText}>Cães</Text>
+            <Text
+              style={[
+                styles.filterText,
+                { color: selectedAnimalType === "dog" ? "#333333" : "white" },
+              ]}
+            >
+              Cães
+            </Text>
           </View>
 
           <View style={styles.filterColumn}>
@@ -46,9 +53,16 @@ export default function TabThreeScreen() {
               icon="cat"
               size={30}
               onPress={() => handleAnimalTypePress("cat")}
-              iconColor={selectedAnimalType === "cat" ? "#333333" : "#d3d3d3"}
+              iconColor={selectedAnimalType === "cat" ? "#333333" : "white"}
             />
-            <Text style={styles.filterText}>Gatos</Text>
+            <Text
+              style={[
+                styles.filterText,
+                { color: selectedAnimalType === "cat" ? "#333333" : "white" },
+              ]}
+            >
+              Gatos
+            </Text>
           </View>
         </View>
         <View style={styles.filterOptions}>
@@ -59,12 +73,7 @@ export default function TabThreeScreen() {
               styles.button,
               selectedSize === "Pequeno" && styles.selectedButton,
             ]}
-            labelStyle={[
-              selectedSize === "Pequeno"
-                ? styles.buttonTextBold
-                : styles.buttonTextRegular,
-              { color: selectedSize === "Pequeno" ? "white" : "#333333" },
-            ]}
+            labelStyle={styles.buttonText}
           >
             Pequeno
           </Button>
@@ -75,12 +84,7 @@ export default function TabThreeScreen() {
               styles.button,
               selectedSize === "Médio" && styles.selectedButton,
             ]}
-            labelStyle={[
-              selectedSize === "Médio"
-                ? styles.buttonTextBold
-                : styles.buttonTextRegular,
-              { color: selectedSize === "Médio" ? "white" : "#333333" },
-            ]}
+            labelStyle={styles.buttonText}
           >
             Médio
           </Button>
@@ -91,12 +95,7 @@ export default function TabThreeScreen() {
               styles.button,
               selectedSize === "Grande" && styles.selectedButton,
             ]}
-            labelStyle={[
-              selectedSize === "Grande"
-                ? styles.buttonTextBold
-                : styles.buttonTextRegular,
-              { color: selectedSize === "Grande" ? "white" : "#333333" },
-            ]}
+            labelStyle={styles.buttonText}
           >
             Grande
           </Button>
@@ -109,12 +108,7 @@ export default function TabThreeScreen() {
               styles.button,
               selectedGender === "Macho" && styles.selectedButton,
             ]}
-            labelStyle={[
-              selectedGender === "Macho"
-                ? styles.buttonTextBold
-                : styles.buttonTextRegular,
-              { color: selectedGender === "Macho" ? "white" : "#333333" },
-            ]}
+            labelStyle={styles.buttonText}
           >
             Macho
           </Button>
@@ -125,12 +119,7 @@ export default function TabThreeScreen() {
               styles.button,
               selectedGender === "Fêmea" && styles.selectedButton,
             ]}
-            labelStyle={[
-              selectedGender === "Fêmea"
-                ? styles.buttonTextBold
-                : styles.buttonTextRegular,
-              { color: selectedGender === "Fêmea" ? "white" : "#333333" },
-            ]}
+            labelStyle={styles.buttonText}
           >
             Fêmea
           </Button>
@@ -156,11 +145,12 @@ export default function TabThreeScreen() {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    // backgroundColor: "#CC5500",
+    backgroundColor: "#e0e0e0",
   },
   filterContainer: {
     marginBottom: 20,
     paddingTop: 50,
+    backgroundColor: "#cc7740",
   },
   filterButtons: {
     flexDirection: "row",
@@ -174,11 +164,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    borderWidth: 1,
+    borderWidth: 2,
+    borderColor: "white",
     minWidth: 60,
   },
   selectedButton: {
     backgroundColor: "#333333",
+    borderColor: "#333333",
   },
   filterColumn: {
     flexDirection: "column",
@@ -189,11 +181,8 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins-SemiBold",
     fontSize: 12,
   },
-  buttonTextRegular: {
-    fontFamily: "Poppins-Regular",
-    fontSize: 12,
-  },
-  buttonTextBold: {
+  buttonText: {
+    color: "white",
     fontFamily: "Poppins-Regular",
     fontSize: 12,
   },

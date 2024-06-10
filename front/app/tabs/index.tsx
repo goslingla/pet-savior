@@ -1,74 +1,233 @@
-import { Image, StyleSheet, Platform } from "react-native";
-
-import { HelloWave } from "@/components/HelloWave";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Modal,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
+import { Button } from "react-native-paper";
+import { useRouter } from "expo-router";
+import * as ImagePicker from "expo-image-picker";
 
 export default function HomeScreen() {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [name, setName] = useState("");
+  const [age, setAge] = useState("");
+  const [breed, setBreed] = useState("");
+  const [size, setSize] = useState("");
+  const [location, setLocation] = useState("");
+  const [reason, setReason] = useState("");
+  const [image, setImage] = useState(null);
+
+  const router = useRouter();
+
+  const openImagePickerAsync = async () => {
+    let permissionResult =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      alert("Permission to access camera roll is required!");
+      return;
+    }
+
+    let pickerResult = await ImagePicker.launchImageLibraryAsync();
+    if (pickerResult.canceled === true) {
+      return;
+    }
+
+    setImage(pickerResult.uri);
+  };
+
+  const handleRegisterPet = () => {
+    // Logic to handle pet registration
+    setModalVisible(false);
+    alert("Pet cadastrado com sucesso!");
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-      headerImage={
-        <Image
-          source={require("@/assets/images/partial-react-logo.png")}
-          style={styles.reactLogo}
-        />
-      }
-    >
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
-          to see changes. Press{" "}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: "cmd + d", android: "cmd + m" })}
-          </ThemedText>{" "}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this
-          starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{" "}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText>{" "}
-          to get a fresh <ThemedText type="defaultSemiBold">app</ThemedText>{" "}
-          directory. This will move the current{" "}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{" "}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={styles.container}>
+      <Text style={styles.title}>Bem vindo, Luiz!</Text>
+      <Text style={styles.description}>
+        Este aplicativo visa ajudar animais perdidos, abandonados e que precisam
+        de um novo lar. Para ter acesso à animais disponíveis para adoção, basta
+        acessar a sessão{" "}
+        <Text style={{ fontFamily: "Poppins-Bold" }}>Adotar</Text>. Para
+        reportar pet desaparecido ou verificar os que foram avistados, acesse o{" "}
+        <Text style={{ fontFamily: "Poppins-Bold" }}>Mapa</Text>.
+      </Text>
+      <TouchableOpacity
+        style={styles.loginButton}
+        onPress={() => setModalVisible(true)}
+      >
+        <Text style={styles.loginButtonText}>Cadastrar pet para Adoção</Text>
+      </TouchableOpacity>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={styles.closeButtonText}>X</Text>
+            </TouchableOpacity>
+            <Text style={styles.modalTitle}>Cadastrar para Adoção</Text>
+            <TextInput
+              placeholder="Nome"
+              value={name}
+              onChangeText={setName}
+              style={styles.input}
+            />
+            <TextInput
+              placeholder="Idade"
+              value={age}
+              onChangeText={setAge}
+              style={styles.input}
+            />
+            <TextInput
+              placeholder="Raça"
+              value={breed}
+              onChangeText={setBreed}
+              style={styles.input}
+            />
+            <TextInput
+              placeholder="Porte (pequeno, médio, grande)"
+              value={size}
+              onChangeText={setSize}
+              style={styles.input}
+            />
+            <TextInput
+              placeholder="Localização"
+              value={location}
+              onChangeText={setLocation}
+              style={styles.input}
+            />
+            <TextInput
+              placeholder="Motivo"
+              value={reason}
+              onChangeText={setReason}
+              style={styles.input}
+            />
+            <Button onPress={openImagePickerAsync} style={styles.imageButton}>
+              <Text style={styles.imageButtonText}>Foto</Text>
+            </Button>
+            {image && <Text style={styles.imageText}>Imagem selecionada</Text>}
+            <Button
+              mode="contained"
+              onPress={handleRegisterPet}
+              style={styles.modalButton}
+            >
+              <Text style={styles.modalButtonText}>Ok</Text>
+            </Button>
+          </View>
+        </View>
+      </Modal>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "row",
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: "#e0e0e0",
+    justifyContent: "center",
+  },
+  title: {
+    fontSize: 24,
+    fontFamily: "Poppins-SemiBold",
+    marginBottom: 100,
+    color: "#333",
+    textAlign: "center",
+  },
+  description: {
+    fontSize: 16,
+    fontFamily: "Poppins-Regular",
+    marginBottom: 30,
+    color: "#333",
+    textAlign: "center",
+  },
+  loginButton: {
+    backgroundColor: "#333333",
+    width: 330,
+    height: 50,
+    borderRadius: 10,
+    marginVertical: 30,
+    justifyContent: "center",
     alignItems: "center",
-    gap: 8,
+    alignSelf: "center",
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  loginButtonText: {
+    color: "white",
+    fontFamily: "Poppins-Regular",
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
+  },
+  modalContent: {
+    width: 300,
+    padding: 20,
+    backgroundColor: "white",
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  closeButton: {
     position: "absolute",
+    top: 10,
+    right: 10,
+  },
+  closeButtonText: {
+    fontSize: 18,
+    color: "#333",
+  },
+  modalTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 10,
+    fontFamily: "Poppins-SemiBold",
+  },
+  input: {
+    width: "100%",
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    marginBottom: 10,
+    padding: 10,
+    borderRadius: 5,
+    fontFamily: "Poppins-Regular",
+  },
+  imageButton: {
+    backgroundColor: "grey",
+    width: 100,
+    marginBottom: 10,
+    justifyContent: "center",
+  },
+  imageButtonText: {
+    color: "white",
+    fontFamily: "Poppins-Bold",
+  },
+  imageText: {
+    fontFamily: "Poppins-Regular",
+    marginBottom: 10,
+    color: "green",
+  },
+  modalButton: {
+    backgroundColor: "#333333",
+    width: 70,
+    justifyContent: "center",
+  },
+  modalButtonText: {
+    color: "white",
+    fontFamily: "Poppins-Regular",
   },
 });

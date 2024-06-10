@@ -71,6 +71,18 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="partners"
+        options={{
+          title: "Parceiros",
+          tabBarIcon: ({ color, focused }) => (
+            <IoniconsTabBarIcon
+              name={focused ? "bag-add-sharp" : "bag-add-outline"}
+              color={"#333333"}
+            />
+          ),
+        }}
+      />
     </Tabs>
   );
 }

@@ -77,11 +77,11 @@ const AnimalCard = ({
             </TouchableOpacity>
             <Text style={styles.modalTitle}>{name}</Text>
             <View style={styles.modalRow}>
-              <Text style={styles.modalBoldText}>Localização: </Text>
+              <Text style={styles.modalBoldText}>Localização:</Text>
               <Text style={styles.modalText}>{location}</Text>
             </View>
             <View style={styles.modalRow}>
-              <Text style={styles.modalBoldText}>Motivo: </Text>
+              <Text style={styles.modalBoldText}>Motivo:</Text>
               <Text style={styles.modalText}>{reason}</Text>
             </View>
             <Button
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 10,
-    backgroundColor: "grey",
+    backgroundColor: "#333333",
     width: 120,
   },
   buttonText: {
@@ -186,7 +186,6 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "white",
     borderRadius: 10,
-    alignItems: "center",
   },
   closeButton: {
     position: "absolute",
@@ -205,16 +204,18 @@ const styles = StyleSheet.create({
   },
   modalRow: {
     flexDirection: "row",
-    alignItems: "center",
     marginBottom: 5,
   },
   modalText: {
     fontSize: 14,
     fontFamily: "Poppins-Regular",
+    flex: 1,
+    flexWrap: "wrap",
   },
   modalBoldText: {
     fontSize: 14,
     fontFamily: "Poppins-Bold",
+    paddingRight: 5,
   },
   modalButton: {
     backgroundColor: "#333333",

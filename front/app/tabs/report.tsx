@@ -37,12 +37,12 @@ export default function TabFourScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#e0e0e0",
     justifyContent: "center",
     alignItems: "center",
   },
   contentContainer: {
-    backgroundColor: "white",
+    backgroundColor: "#e0e0e0",
     borderRadius: 10,
     padding: 20,
     alignItems: "center",
