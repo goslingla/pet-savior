@@ -4,21 +4,65 @@
   <title>Leaflet Map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"> <!-- Adiciona a fonte Poppins -->
   <style>
     body, html {
       margin: 0;
       padding: 0;
       height: 100%;
       width: 100%;
+      font-family: 'Poppins', sans-serif; /* Aplica Poppins para todo o corpo */
     }
     #map {
       height: 100%;
       width: 100%;
     }
+    .popup-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: 'Poppins', sans-serif; /* Adiciona a fonte Poppins */
+    }
+    .popup-button {
+      background-color: #25D366;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 10px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-size: 14px;
+      font-family: 'Poppins', sans-serif; /* Adiciona a fonte Poppins */
+    }
+    .popup-button img {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+    }
+    .fab {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 56px;
+      height: 56px;
+      background-color: #333;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0px 2px 10px rgba(0,0,0,0.3);
+      z-index: 1000; /* Adiciona um índice z alto para garantir que o botão fique acima do mapa */
+    }
   </style>
 </head>
 <body>
   <div id="map"></div>
+  <div class="fab" onclick="recenterMap()">⌖</div>
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <script>
     var map = L.map('map').setView([-27.599982937580354, -48.51710645556599], 13); // Ajuste as coordenadas aqui
@@ -64,13 +108,42 @@
       var message = type === 'sighting' ? `Animal avistado às ${time}<br>${date}` : `Animal desaparecido às ${time}<br>${date}`;
       imageUrl = imageUrl || 'https://via.placeholder.com/100'; // Placeholder if no image
 
-      var popupContent = '<div>' +
-                          '<p>' + message + '</p>' +
+      var popupContent = '<div class="popup-content">' +
+                          '<p style="font-family: \'Poppins\', sans-serif;">' + message + '</p>' +
                           '<img src="' + imageUrl + '" alt="Animal" width="100" height="100">' +
+                          '<button class="popup-button" onclick="openWhatsApp()">' +
+                            '<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">' +
+                            'Entrar em contato' +
+                          '</button>' +
                          '</div>';
       L.marker([latLng.lat, latLng.lng], { icon: icon }).addTo(map)
         .bindPopup(popupContent)
         .openPopup();
+    }
+
+    // Função para abrir WhatsApp
+    function openWhatsApp() {
+      var phone = "5591999999999"; // Substitua pelo número de telefone correto
+      var message = "Olá, estou interessado no animal avistado.";
+      var url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+    }
+
+    // Função para recentralizar o mapa na localização atual
+    function recenterMap() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var latLng = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          map.setView([latLng.lat, latLng.lng], 13);
+        }, function(error) {
+          console.error("Erro ao obter localização: ", error);
+        });
+      } else {
+        alert("Geolocalização não é suportada pelo seu navegador.");
+      }
     }
 
     // Receber mensagem do React Native

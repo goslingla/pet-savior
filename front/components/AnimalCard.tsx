@@ -6,8 +6,10 @@ import {
   Text,
   Modal,
   TouchableOpacity,
+  Image, // Adicione esta linha
 } from "react-native";
 import { Button } from "react-native-paper";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 type AnimalCardProps = {
   name: string;
@@ -84,14 +86,19 @@ const AnimalCard = ({
               <Text style={styles.modalBoldText}>Motivo:</Text>
               <Text style={styles.modalText}>{reason}</Text>
             </View>
-            <Button
-              mode="contained"
+            <TouchableOpacity
+              style={styles.whatsappButton} // Alterado para usar o botão personalizado
               onPress={handleInterest}
-              style={styles.modalButton}
-              labelStyle={{ fontFamily: "Poppins-Regular" }}
             >
-              Tenho interesse
-            </Button>
+              <Ionicons
+                name={"logo-whatsapp"}
+                color={"white"}
+                size={28}
+                style={{ marginHorizontal: 10 }}
+              />
+
+              <Text style={styles.whatsappButtonText}>Entre em contato</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -220,6 +227,28 @@ const styles = StyleSheet.create({
   modalButton: {
     backgroundColor: "#333333",
     marginTop: 10,
+  },
+  whatsappButton: {
+    // Adicionado para o botão "Entre em contato"
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#25D366",
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    borderRadius: 5,
+    marginTop: 20,
+  },
+  whatsappIcon: {
+    // Adicionado para o ícone do WhatsApp
+    width: 20,
+    height: 20,
+    marginRight: 10,
+  },
+  whatsappButtonText: {
+    // Adicionado para o texto do botão "Entre em contato"
+    color: "white",
+    fontSize: 14,
+    fontFamily: "Poppins-SemiBold",
   },
 });
 

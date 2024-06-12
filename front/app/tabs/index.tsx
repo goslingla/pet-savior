@@ -7,7 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { Button } from "react-native-paper";
+import { Button, Checkbox } from "react-native-paper";
 import { useRouter } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
 
@@ -20,6 +20,10 @@ export default function HomeScreen() {
   const [location, setLocation] = useState("");
   const [reason, setReason] = useState("");
   const [image, setImage] = useState(null);
+  const [gender, setGender] = useState("");
+  const [sizeSmall, setSizeSmall] = useState(false);
+  const [sizeMedium, setSizeMedium] = useState(false);
+  const [sizeLarge, setSizeLarge] = useState(false);
 
   const router = useRouter();
 
@@ -98,12 +102,6 @@ export default function HomeScreen() {
               style={styles.input}
             />
             <TextInput
-              placeholder="Porte (pequeno, médio, grande)"
-              value={size}
-              onChangeText={setSize}
-              style={styles.input}
-            />
-            <TextInput
               placeholder="Localização"
               value={location}
               onChangeText={setLocation}
@@ -115,17 +113,69 @@ export default function HomeScreen() {
               onChangeText={setReason}
               style={styles.input}
             />
-            <Button onPress={openImagePickerAsync} style={styles.imageButton}>
-              <Text style={styles.imageButtonText}>Foto</Text>
-            </Button>
+            <TouchableOpacity
+              onPress={openImagePickerAsync}
+              style={styles.input}
+            >
+              <Text style={styles.imageButtonText}>Carregar imagem</Text>
+            </TouchableOpacity>
             {image && <Text style={styles.imageText}>Imagem selecionada</Text>}
-            <Button
-              mode="contained"
+            <Text style={styles.labelBold}>Porte:</Text>
+            <View style={styles.checkboxContainer}>
+              <Checkbox
+                status={sizeSmall ? "checked" : "unchecked"}
+                onPress={() => {
+                  setSizeSmall(true);
+                  setSizeMedium(false);
+                  setSizeLarge(false);
+                }}
+                color="#333333"
+              />
+              <Text style={styles.checkboxLabel}>Pequeno</Text>
+              <Checkbox
+                status={sizeMedium ? "checked" : "unchecked"}
+                onPress={() => {
+                  setSizeSmall(false);
+                  setSizeMedium(true);
+                  setSizeLarge(false);
+                  setSize("Médio");
+                }}
+                color="#333333"
+              />
+              <Text style={styles.checkboxLabel}>Médio</Text>
+              <Checkbox
+                status={sizeLarge ? "checked" : "unchecked"}
+                onPress={() => {
+                  setSizeSmall(false);
+                  setSizeMedium(false);
+                  setSizeLarge(true);
+                  setSize("Grande");
+                }}
+                color="#333333"
+              />
+              <Text style={styles.checkboxLabel}>Grande</Text>
+            </View>
+            <Text style={styles.labelBold}>Gênero:</Text>
+            <View style={styles.checkboxContainer}>
+              <Checkbox
+                status={gender === "Macho" ? "checked" : "unchecked"}
+                onPress={() => setGender("Macho")}
+                color="#333333"
+              />
+              <Text style={styles.checkboxLabel}>Macho</Text>
+              <Checkbox
+                status={gender === "Fêmea" ? "checked" : "unchecked"}
+                onPress={() => setGender("Fêmea")}
+                color="#333333"
+              />
+              <Text style={styles.checkboxLabel}>Fêmea</Text>
+            </View>
+            <TouchableOpacity
               onPress={handleRegisterPet}
               style={styles.modalButton}
             >
               <Text style={styles.modalButtonText}>Ok</Text>
-            </Button>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -143,7 +193,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontFamily: "Poppins-SemiBold",
-    marginBottom: 100,
+    marginBottom: 20,
     color: "#333",
     textAlign: "center",
   },
@@ -192,7 +242,6 @@ const styles = StyleSheet.create({
   },
   modalTitle: {
     fontSize: 16,
-    fontWeight: "bold",
     marginBottom: 10,
     fontFamily: "Poppins-SemiBold",
   },
@@ -206,15 +255,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     fontFamily: "Poppins-Regular",
   },
-  imageButton: {
-    backgroundColor: "grey",
-    width: 100,
-    marginBottom: 10,
-    justifyContent: "center",
-  },
   imageButtonText: {
-    color: "white",
-    fontFamily: "Poppins-Bold",
+    color: "gray",
+    fontFamily: "Poppins-Regular",
   },
   imageText: {
     fontFamily: "Poppins-Regular",
@@ -223,11 +266,27 @@ const styles = StyleSheet.create({
   },
   modalButton: {
     backgroundColor: "#333333",
-    width: 70,
-    justifyContent: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    marginVertical: 10,
   },
   modalButtonText: {
     color: "white",
+    fontFamily: "Poppins-Regular",
+  },
+  checkboxContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  labelBold: {
+    fontSize: 14,
+    fontFamily: "Poppins-Bold",
+    marginTop: 10,
+  },
+  checkboxLabel: {
+    fontSize: 14,
     fontFamily: "Poppins-Regular",
   },
 });

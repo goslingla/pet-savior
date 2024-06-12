@@ -141,7 +141,15 @@ export default function TabTwoScreen() {
               style={styles.goBackButton}
               onPress={() => setModalVisible(false)}
             >
-              <Text style={{ color: "black", fontSize: 16 }}>Voltar</Text>
+              <Text
+                style={{
+                  color: "black",
+                  fontSize: 16,
+                  fontFamily: "Poppins-Regular",
+                }}
+              >
+                Voltar
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -170,7 +178,15 @@ export default function TabTwoScreen() {
               <Text style={styles.buttonText}>Enviar</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.goBackButton} onPress={addMarker}>
-              <Text style={{ color: "black", fontSize: 16 }}>Pular</Text>
+              <Text
+                style={{
+                  color: "black",
+                  fontSize: 16,
+                  fontFamily: "Poppins-Regular",
+                }}
+              >
+                Pular
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -202,6 +218,7 @@ const styles = StyleSheet.create({
   modalText: {
     fontSize: 18,
     marginBottom: 20,
+    fontFamily: "Poppins-Regular",
   },
   modalButton: {
     backgroundColor: "#333",
@@ -220,6 +237,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
     fontSize: 16,
+    fontFamily: "Poppins-Regular",
   },
   input: {
     height: 40,
